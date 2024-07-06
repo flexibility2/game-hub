@@ -11,18 +11,15 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
   return (
     <Card borderRadius={10} overflow="hidden">
-      <Image
-        src={getCroppedImageUrl(game.background_image)}
-        objectFit={"cover"}
-      ></Image>
+      <Image src={getCroppedImageUrl(game.background_image)}></Image>
       <CardBody>
-        <Heading fontSize={"2xl"}>{game.name}</Heading>
         <HStack justifyContent={"space-between"} marginBottom={3}>
           <PlatformIconList
             platforms={game.parent_platforms}
           ></PlatformIconList>
           <CriticScore score={game.metacritic}></CriticScore>
         </HStack>
+        <Heading fontSize={"2xl"}>{game.name}</Heading>
       </CardBody>
     </Card>
   );

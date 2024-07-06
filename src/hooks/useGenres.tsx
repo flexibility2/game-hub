@@ -1,5 +1,6 @@
 import React from "react";
 import useData from "./useData";
+import { genres } from "../data/genres";
 
 export interface Genres {
   id: number;
@@ -9,8 +10,11 @@ export interface Genres {
   games_count: number;
 }
 
+// const useGenres = () => {
+//   return useData<Genres>("genres");
+// };
 const useGenres = () => {
-  return useData<Genres>("genres");
+  return { data: genres, error: null, loading: false };
 };
 
 export default useGenres;

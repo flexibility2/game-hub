@@ -18,16 +18,16 @@ interface GenresProps {
 }
 
 const GenresList = ({ onSelectGenres, selectedGenres }: GenresProps) => {
-  const { data, error, loading } = useGenres();
+  const { data, error, isLoading } = useGenres();
   if (error) return null;
   return (
     <>
-      {loading && <Spinner></Spinner>}
+      {isLoading && <Spinner></Spinner>}
       <Heading fontSize="2xl" marginBottom={3}>
         Genres
       </Heading>
       <List>
-        {data.map((genre) => (
+        {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY={"5px"}>
             <HStack>
               <Image

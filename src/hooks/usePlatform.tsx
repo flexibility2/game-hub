@@ -1,21 +1,9 @@
 import React from "react";
-import { platform } from "../data/platform";
-import { useQuery } from "@tanstack/react-query";
-import APIClient from "../services/api-client";
+import usePlatforms from "./usePlatforms";
 
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
-const apiClient = new APIClient<Platform>("/platforms/lists/parents");
-
-const usePlatform = () =>
-  useQuery({
-    queryKey: ["platform"],
-    queryFn: () => apiClient.getAll(),
-    staleTime: 1000 * 60 * 60,
-    initialData: { count: platform.length, results: platform },
-  });
+const usePlatform = (id?: number) => {
+  const { data: platforms } = usePlatforms();
+  return platforms?.results.find((p) => p.id === id);
+};
 
 export default usePlatform;

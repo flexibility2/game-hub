@@ -1,26 +1,16 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Grid,
-  GridItem,
-  HStack,
-  Show,
-} from "@chakra-ui/react";
-import Navbar from "./components/NavBar";
-import GameGrid from "./components/GameGrid";
-import GenresList from "./components/GenresList";
+import { Box, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import { useState } from "react";
-import { Genres } from "./hooks/useGenres";
-import PlatformList from "./components/PlatformList";
-import { Game } from "./hooks/useGames";
-import SortSelector from "./components/SortSelector";
+
+import GameGrid from "./components/GameGrid";
 import GameHeading from "./components/GameHeading";
-import { Platform } from "./hooks/usePlatform";
+import GenresList from "./components/GenresList";
+import Navbar from "./components/NavBar";
+import PlatformList from "./components/PlatformList";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
-  genres: Genres | null;
-  platforms: Platform | null;
+  genreId?: number;
+  platformId?: number;
   sortOrder: string;
   search: string;
 }
@@ -46,8 +36,10 @@ function App() {
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
           <GenresList
-            selectedGenres={gameQuery.genres}
-            onSelectGenres={(genres) => setGameQuery({ ...gameQuery, genres })}
+            selectedGenreId={gameQuery.genreId}
+            onSelectGenres={(genres) =>
+              setGameQuery({ ...gameQuery, genreId: genres.id })
+            }
           ></GenresList>
         </GridItem>
       </Show>
@@ -56,9 +48,9 @@ function App() {
           <GameHeading gameQuery={gameQuery}></GameHeading>
           <HStack spacing={5} marginBottom={5}>
             <PlatformList
-              selectedPlateform={gameQuery.platforms}
+              selectedPlateformId={gameQuery.platformId}
               onSelectPlatform={(platform) =>
-                setGameQuery({ ...gameQuery, platforms: platform })
+                setGameQuery({ ...gameQuery, platformId: platform.id })
               }
             ></PlatformList>
             <SortSelector

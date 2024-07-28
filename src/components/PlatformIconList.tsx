@@ -13,8 +13,8 @@ import { SiNintendo } from "react-icons/si";
 import { BsGlobe } from "react-icons/bs";
 import { IconType } from "react-icons";
 import { Platform } from "../entities/Platform";
-interface GamePlatformListProps {
-  platforms: [{ platform: Platform }];
+interface Props {
+  platforms: Platform[];
 }
 
 const iconMap: { [key: string]: IconType } = {
@@ -29,12 +29,12 @@ const iconMap: { [key: string]: IconType } = {
   web: BsGlobe,
 };
 
-const PlatformIconList = ({ platforms }: GamePlatformListProps) => {
+const PlatformIconList = ({ platforms = [] }: Props) => {
   return (
     <>
       <HStack color={"gray.500"} marginY={1}>
         {platforms.map((item) => (
-          <Icon key={item.platform.id} as={iconMap[item.platform.slug]}></Icon>
+          <Icon key={item.id} as={iconMap[item.slug]}></Icon>
         ))}
       </HStack>
     </>

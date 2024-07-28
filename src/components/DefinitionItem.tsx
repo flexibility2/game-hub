@@ -7,7 +7,7 @@ interface Props {
 }
 const DefinitionItem = ({ term, children }: Props) => {
   return (
-    <Box>
+    <Box marginY={5}>
       <Heading as="dt" size="md" color="gray.600">
         {term}
       </Heading>
